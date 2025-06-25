@@ -55,6 +55,104 @@ const permissionRouter = {
   ]
 };
 
+const systemMonitorRouter = {
+  path: "/monitor",
+  meta: {
+    icon: "ep:monitor",
+    title: "系统监控",
+    rank: 15
+  },
+  children: [
+    {
+      path: "/monitor/online-user",
+      component: "monitor/online/index",
+      name: "OnlineUser",
+      meta: {
+        icon: "ri:user-voice-line",
+        title: "在线用户",
+        roles: ["admin"]
+      }
+    },
+    {
+      path: "/monitor/login-logs",
+      component: "monitor/logs/login/index",
+      name: "LoginLog",
+      meta: {
+        icon: "ri:window-line",
+        title: "登录日志",
+        roles: ["admin"]
+      }
+    },
+    {
+      path: "/monitor/operation-logs",
+      component: "monitor/logs/operation/index",
+      name: "OperationLog",
+      meta: {
+        icon: "ri:history-fill",
+        title: "操作日志",
+        roles: ["admin"]
+      }
+    },
+    {
+      path: "/monitor/system-logs",
+      component: "monitor/logs/system/index",
+      name: "SystemLog",
+      meta: {
+        icon: "ri:file-search-line",
+        title: "系统日志",
+        roles: ["admin"]
+      }
+    }
+  ]
+};
+
+const systemManagementRouter = {
+  path: "/system",
+  meta: {
+    icon: "ri:settings-3-line",
+    title: "系统管理",
+    rank: 14
+  },
+  children: [
+    {
+      path: "/system/user/index",
+      name: "SystemUser",
+      meta: {
+        icon: "ri:admin-line",
+        title: "用户管理",
+        roles: ["admin"]
+      }
+    },
+    {
+      path: "/system/role/index",
+      name: "SystemRole",
+      meta: {
+        icon: "ri:admin-fill",
+        title: "角色管理",
+        roles: ["admin"]
+      }
+    },
+    {
+      path: "/system/menu/index",
+      name: "SystemMenu",
+      meta: {
+        icon: "ep:menu",
+        title: "菜单管理",
+        roles: ["admin"]
+      }
+    },
+    {
+      path: "/system/dept/index",
+      name: "SystemDept",
+      meta: {
+        icon: "ri:git-branch-line",
+        title: "部门管理",
+        roles: ["admin"]
+      }
+    }
+  ]
+};
+
 export default defineFakeRoute([
   {
     url: "/get-async-routes",
@@ -62,7 +160,7 @@ export default defineFakeRoute([
     response: () => {
       return {
         success: true,
-        data: [permissionRouter]
+        data: [permissionRouter, systemManagementRouter, systemMonitorRouter]
       };
     }
   }

@@ -5,21 +5,19 @@
   "type": "module",
   "scripts": {
     "dev": "NODE_OPTIONS=--max-old-space-size=4096 vite",
-    "serve": "pnpm dev",
+    "serve": "bun run dev",
     "build": "rimraf dist && NODE_OPTIONS=--max-old-space-size=8192 vite build",
     "build:staging": "rimraf dist && vite build --mode staging",
     "report": "rimraf dist && vite build",
     "preview": "vite preview",
-    "preview:build": "pnpm build && vite preview",
+    "preview:build": "bun run build && vite preview",
     "typecheck": "tsc --noEmit && vue-tsc --noEmit --skipLibCheck",
     "svgo": "svgo -f . -r",
-    "clean:cache": "rimraf .eslintcache && rimraf pnpm-lock.yaml && rimraf node_modules && pnpm store prune && pnpm install",
+    "clean:cache": "rimraf .eslintcache && rimraf bun.lockb && rimraf node_modules && bun install",
     "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock,build}/**/*.{vue,js,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write  \"src/**/*.{js,ts,json,tsx,css,scss,vue,html,md}\"",
     "lint:stylelint": "stylelint --cache --fix \"**/*.{html,vue,css,scss}\" --cache-location node_modules/.cache/stylelint/",
-    "lint": "pnpm lint:eslint && pnpm lint:prettier && pnpm lint:stylelint",
-    "prepare": "husky",
-    "preinstall": "npx only-allow pnpm"
+    "lint": "bun run lint:eslint && bun run lint:prettier && bun run lint:stylelint"
   },
   "keywords": [
     "pure-admin-thin",
@@ -53,8 +51,10 @@
     "@pureadmin/utils": "^2.6.0",
     "@vueuse/core": "^13.1.0",
     "@vueuse/motion": "^3.0.3",
+    "@zxcvbn-ts/core": "^3.0.4",
     "animate.css": "^4.1.1",
     "axios": "^1.9.0",
+    "cropperjs": "^2.0.0",
     "dayjs": "^1.11.13",
     "echarts": "^5.6.0",
     "element-plus": "^2.9.8",
@@ -69,14 +69,12 @@
     "responsive-storage": "^2.2.0",
     "sortablejs": "^1.15.6",
     "vue": "^3.5.13",
+    "vue-json-pretty": "^2.5.0",
     "vue-router": "^4.5.0",
     "vue-tippy": "^6.7.0",
     "vue-types": "^6.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
-    "@commitlint/types": "^19.8.0",
     "@eslint/js": "^9.25.1",
     "@faker-js/faker": "^9.7.0",
     "@iconify/json": "^2.2.331",
@@ -98,8 +96,6 @@
     "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-vue": "^10.0.0",
     "gradient-string": "^3.0.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^15.5.1",
     "postcss": "^8.5.3",
     "postcss-html": "^1.8.0",
     "postcss-load-config": "^6.0.1",
@@ -130,30 +126,14 @@
   },
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=22.0.0",
-    "pnpm": ">=9"
+    "bun": ">=1.0.0"
   },
-  "pnpm": {
-    "allowedDeprecatedVersions": {
-      "are-we-there-yet": "*",
-      "sourcemap-codec": "*",
-      "lodash.isequal": "*",
-      "domexception": "*",
-      "w3c-hr-time": "*",
-      "inflight": "*",
-      "npmlog": "*",
-      "rimraf": "*",
-      "stable": "*",
-      "gauge": "*",
-      "abab": "*",
-      "glob": "*"
-    },
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "core-js",
-      "es5-ext",
-      "esbuild",
-      "typeit",
-      "vue-demi"
-    ]
-  }
+  "trustedDependencies": [
+    "@parcel/watcher",
+    "core-js",
+    "es5-ext",
+    "esbuild",
+    "typeit",
+    "vue-demi"
+  ]
 }
